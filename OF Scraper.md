@@ -146,17 +146,16 @@ ofscraper
 .\ofscraper
 ```
 
-You will then be prompted through the install process of the scraper. There are some things that it needs to be able to run the files. 
+You will then be prompted through the install process of the scraper.
 
-If you use firefox, you can use this extension to get the necessary cookie information. You can download it here: https://addons.mozilla.org/en-US/firefox/addon/onlyfans/
-
-But you can also get the information yourself using developer tools.
-
-**Sign into Onlyfans in your browser.**
+### Cookie Info
+* If you use firefox, you can use this extension to get the necessary cookie information. You can download it here: https://addons.mozilla.org/en-US/firefox/addon/onlyfans/
+- But you can also get the information yourself using developer tools.
+- **Sign into Onlyfans in your browser.**
 
 ### Manual Cookie Info
 
-This option will have you manual fill all the required information
+- This option will have you manual fill all the required information
 ```
 {
     "auth": {
@@ -170,34 +169,30 @@ This option will have you manual fill all the required information
 }
 ```
 
-It's really not that bad. I'll show you in the next sections how to get these bits of info.
+- It's really not that bad. I'll show you in the next sections how to get these bits of info.
 
 ##### Step One: Creating the 'auth.json' File
 
-You first need to run the program in order for the `auth.json` file to be created. To run it, simply type `ofscraper` in your terminal and hit enter. Because you don't have an `auth.json` file, the program will create one for you and then ask you to enter some information. Now we need to get that information.
+- You first need to run the program in order for the `auth.json` file to be created. To run it, simply type `ofscraper` in your terminal and hit enter. Because you don't have an `auth.json` file, the program will create one for you and then ask you to enter some information. Now we need to get that information.
 ##### Step Two: Getting Your Auth Info
-Open DevTools, Hit F12 on your keyboard.
+- Open DevTools, Hit F12 on your keyboard.
 
-Click on the network tab![[Pasted image 20230726212539.png]]then you can click on filter and search for id.
-You may need to refresh Onlyfans to get the info to populate.
+- Click on the network tab![[Pasted image 20230726212539.png]]
+- then you can click on filter and search for id.
+	- You may need to refresh Onlyfans to get the info to populate.
+- You need to get the following: Explained below
+	- `sess=`
+	- `suth_id=`
+	- `auth_uid=`
+	- `User-Agent`
+	- `x-bc`
 
-You need to get the following: Explained below
-- `sess=`
-- `suth_id=`
-- `auth_uid=`
-- `User-Agent`
-- `x-bc`
-
-> Your `auth_uid_` *will only appear* **if you have 2FA (two-factor authentication)** enabled. *Also, keep in mind that your auth_uid_ will have numbers after the final underscore and before the equal sign (that's your auth_id)*.
-> 
-> Once you've copied the value for your `sess` cookie, go back to the program, paste it in, and hit enter. Now go back to your browser, copy the `auth_id` value, and paste it into the program and hit enter. Then go back to your browser, copy the `auth_uid_` value, and paste it into the program and hit enter (**leave this blank if you don't use 2FA!!!**).
-> 
-> Once you do that, the program will ask for your user agent. You should be able to find your user agent in a field called `User-Agent` below the `Cookie` field. Copy it and paste it into the program and hit enter.
-> 
-> After it asks for your user agent, it will ask for your `x-bc` token. You should also be able to find this in the `Request Headers` section.
-
-
-
+>[!info]
+Your `auth_uid_` will only appear if you have **2FA** (*two-factor authentication*) enabled. Also, keep in mind that your `auth_uid_` will have numbers after the final underscore and before the equal sign (that's your `auth_id`).
+Once you've copied the value for your `sess` cookie, go back to the program, paste it in, and hit enter. Now go back to your browser, copy the `auth_id` value, and paste it into the program and hit enter. Then go back to your browser, copy the `auth_uid_` value, and paste it into the program and hit enter **(leave this blank if you don't use 2FA!!!)**.
+>
+Once you do that, the program will ask for your user agent. You should be able to find your user agent in a field called `User-Agent` below the `Cookie` field. 
+Copy it and paste it into the program and hit enter. After it asks for your user agent, it will ask for your `x-bc` token. You should also be able to find this in the `Request Headers` section.
 
 
 # Important Config
