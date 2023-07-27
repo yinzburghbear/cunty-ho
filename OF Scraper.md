@@ -2,7 +2,7 @@
 
 # Step 1 - Install Python
 1. Check for Python and Install if needed.
-2. Open Terminal. Click Start -> type "Terminal" ![[Media\Pasted image 20230726111646.png]]
+2. Open Terminal. Click Start -> type "Terminal" ![](Media\Pasted image 20230726111646.png)
 3. Enter: 
 ```
 py -3 -V
