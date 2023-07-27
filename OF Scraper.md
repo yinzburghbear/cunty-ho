@@ -1,30 +1,36 @@
-
-
 # Step 1 - Install Python
+
 1. Check for Python and Install if needed.
-2. Open Terminal. Click Start -> type "Terminal" 
-![Screenshot of a comment on a GitHub issue showing an image, added in the Markdown, of an Octocat smiling and raising a tentacle.](https://myoctocat.com/assets/images/base-octocat.svg)
-![Pasted image 20230726111646.png](Media/Pasted image 20230726111646.png)
+
+2. Open Terminal. Click Start -> type "Terminal"
+
+    ![Alt text](<Media/Pasted image 20230726111646.png>)
+
 3. Enter: 
-```
-py -3 -V
-```
-	a. If you see Python 3.8+ this is good and you can move to Step 2.
-	b. If you see Python 3.7 or no results, you'll need to install python.
-4. https://www.python.org/downloads/
-![[Pasted image 20230726113305.png]]
+    ```
+    py -3 -V
+    ```
+    - If you see Python 3.8+ this is good and you can move to Step 2.
+    - If you see Python 3.7 or no results, you'll need to install python.
+4. Go to: https://www.python.org/downloads/ and download Python for Windows.
+
+    ![Alt text](<Media/Pasted image 20230726113305.png>)
+
 5. Once downloaded, run the installer and make sure to select the full install, should be the top option with the shield, as well as select the two check boxes at the bottom of the window that says, **"Install launcher for all users (recommended)"** and **"Add Python 3.x.x to PATH"**
+
 6. Once the installer is complete go back to the terminal window.
+
 7. Enter:
-```
-py -3 -m pip -V
-```
 
-You should be returned something like:
+    ```
+    py -3 -m pip -V
+    ```
 
-```
-pip 23.1.2 from C:\Users\jason\AppData\Local\Programs\Python\Python311\Lib\site-packages\pip (python 3.11)
-```
+    You should be returned something like:
+
+    ```
+    pip 23.1.2 from C:\Users\jason\AppData\Local\Programs\Python\Python311\Lib\site-packages\pip (python 3.11)
+    ```
 
 # Step 2 - Install Android Studio
 
@@ -32,20 +38,21 @@ DRM override settings will take some time.
 
 You will need to download Android Studio, https://developer.android.com/studio
 - Select Download Android Studio Giraffe
+
 This is a fairly large app so might take time. 
 
 1. Once downloaded install with default settings and launch the studio at the end. 
 2. On the welcome screen click next, then follow the standard install. 
 3. Agree to all the terms on the next screen and it will begin more downloads. 
 4. When you get to this window click on *More Actions*
-	1. ![[Pasted image 20230726121905.png]]
+	1. ![Android Studio](<Media/Pasted image 20230726121905.png>)
 	2. Click *Create Device* at the top left
 	3. Select *Pixel 6
-		1. ![[Pasted image 20230726231057.png]]
+		1. ![Pixel 6](<Media/Pasted image 20230726231057.png>)
 		2. Click *Next*
 	5. Select **Pie** and click on the *download icon* next to it to download that environment. 
 		1. Agree to the terms and the download will begin. as the System Image and *Click Next*
-		2. ![[Pasted image 20230726231206.png]]
+		2. ![pie](<Media/Pasted image 20230726231206.png>)
 		3. Once it's completed Downloading click *Next*
 	6. Click *Show Advanced Settings* and scroll down to RAM and VRAM. **You'll need to give this about 4 to 6 GB to make this experience even remotely tolerable. Depending on how much RAM you have on your computer.**  
 	7. Click *Finish*
@@ -54,7 +61,7 @@ This is a fairly large app so might take time.
 # Step 3 - Frida & Dumper
 
 1. Before we launch the emulator, there are a few items we will need to have available.
-2. Download the zip file called ![[dumper-main.zip|dumper-main.zip]]from this folder. 
+2. Download the zip file called [dumper-main Download](dumper-main.zip). 
 3. Extract it to your downloads folder and navigate to it. 
 4. Once inside right click and select *Open in Terminal*
 5. Type the following in the terminal
@@ -62,9 +69,9 @@ This is a fairly large app so might take time.
 pip install -r .\requirements.txt
 ```
 6. You should be returned with something similar to this:
-	1. ![[Pasted image 20230726123434.png]]
+	1. ![Requirements](<Media/Pasted image 20230726123434.png>)
 	2. Keep this window open, we will need to come back to it soon.
-7. Also download this file to your computer, ![[frida-server-16.1.zip]] and we will be moving it to the android device. Once downloaded, you will need to copy this to a hidden folder for android.
+7. Also download this file to your computer, [Frida Download](frida-server-16.1.zip) and we will be moving it to the android device. Once downloaded, unzip it, you will need to copy this to a hidden folder for android.
 	1. Typical copy the file, and paste it in the platform tools folder. Change the username as needed.
 		1. `C:\Users\jason\AppData\Local\Android\Sdk\platform-tools`
 
@@ -91,30 +98,27 @@ adb.exe devices
 .\adb.exe devices
 ```
 4. You should now see "List of devices attached"
-	1. ![[Pasted image 20230726130323.png]]
+	1. ![Devices](<Media/Pasted image 20230726130323.png>)
 5. Now we are going to copy the Frida file and turn on the server.
 6. Enter the following:  <mark style="background: #FF5582A6;">(you can copy and in windows terminal/powershell just right click and it'll auto-paste)</mark>
-```
-1. .\adb.exe push frida-server-16.1.3-android-x86 /sdcard
-```
+    ```
+    .\adb.exe push frida-server-16.1.3-android-x86 /sdcard
+    ```
 7. Then now we have to connect to start up Frida. Type the following.
-```
-- .\adb.exe shell
+    ```
+    .\adb.exe shell
+    su
+    mv /sdcard/frida-server-16.1.3-android-x86 /data/local/tmp
+    chmod +x /data/local/tmp/frida-server-16.1.3-android-x86
+    /data/local/tmp/frida-server-16.1.3-android-x86
+    ```
 
-- su
-
-- mv /sdcard/frida-server-16.1.3-android-x86 /data/local/tmp
-
-- chmod +x /data/local/tmp/frida-server-16.1.3-android-x86
-
-- /data/local/tmp/frida-server-16.1.3-android-x86
-
-```
-
->[!tip] Side-Note
+>## Side-Note
 >During any one of the phases you may be disconnected from the "shell" and taken back to your regular prompt. 
->![[Pasted image 20230726134014.png]]
->Just reconnect and remember to you will need to **su** again. Only if you haven't made it to the last line of the code.
+>![disconnect](<Media/Pasted image 20230726134014.png>)
+>
+>Just reconnect and remember to you will need to **su** again. 
+>Only if you haven't made it to the last line of the code.
 
 You'll know it's running when you are just returned to either a blank emu line or back to your terminal line after entering the final `/data/local/tmp/frida-server-16.1.3-android-x86` text info.
 
@@ -124,13 +128,13 @@ python dump_keys.py
 ```
 - You'll see text start to run by on the screen. Leave this open and go back to the emulator. 
 	- Looks like this:
-	- ![[Pasted image 20230726204751.png]]
+	- ![dump-keys](<Media/Pasted image 20230726204751.png>)
 - Now on the emulator open this page in chrome: https://bitmovin.com/demos/drm
 - You will have to type it in, you can't copy it and the auto-complete from google is incorrect.
 
 Once you get the page to load, you'll click play on the video and you should also be able to see the terminal window at the same time. 
 The terminal window will fill in really quick and you should see something like this:
-![[Pasted image 20230726204859.png]]
+![success](<Media/Pasted image 20230726204859.png>)
 
 This is indicating that the keys have been saved to the dump_keys folder and we will need to save those for the only fans app.
 
@@ -184,7 +188,7 @@ Extra easy way.
 - It's really not that bad. I'll show you in the next sections how to get these bits of info.
 ##### Getting Your Auth Info
 - Open DevTools, Hit F12 on your keyboard.
-- Click on the network tab![[Pasted image 20230726212539.png]]
+- Click on the network tab![Network tab](<Media/Pasted image 20230726212539.png>)
 - then you can click on filter and search for id.
 	- You may need to refresh Onlyfans to get the info to populate.
 - You need to get the following: Explained below
@@ -194,12 +198,12 @@ Extra easy way.
 	- `User-Agent`
 	- `x-bc`
 
->[!info]
-Your `auth_uid_` will only appear if you have **2FA** (*two-factor authentication*) enabled. Also, keep in mind that your `auth_uid_` will have numbers after the final underscore and before the equal sign (that's your `auth_id`).
-Once you've copied the value for your `sess` cookie, go back to the program, paste it in, and hit enter. Now go back to your browser, copy the `auth_id` value, and paste it into the program and hit enter. Then go back to your browser, copy the `auth_uid_` value, and paste it into the program and hit enter **(leave this blank if you don't use 2FA!!!)**.
+>## FYI:
+>Your `auth_uid_` will only appear if you have **2FA** (*two-factor authentication*) enabled. Also, keep in mind that your `auth_uid_` will have numbers after the final underscore and before the equal sign (that's your `auth_id`).
+>Once you've copied the value for your `sess` cookie, go back to the program, paste it in, and hit enter. Now go back to your browser, copy the `auth_id` value, and paste it into the program and hit enter. Then go back to your browser, copy the `auth_uid_` value, and paste it into the program and hit enter **(leave this blank if you don't use 2FA!!!)**.
 >
-Once you do that, the program will ask for your user agent. You should be able to find your user agent in a field called `User-Agent` below the `Cookie` field. 
-Copy it and paste it into the program and hit enter. After it asks for your user agent, it will ask for your `x-bc` token. You should also be able to find this in the `Request Headers` section.
+>Once you do that, the program will ask for your user agent. You should be able to find your user agent in a field called `User-Agent` below the `Cookie` field. 
+>Copy it and paste it into the program and hit enter. After it asks for your user agent, it will ask for your `x-bc` token. You should also be able to find this in the `Request Headers` section.
 
 # Step 6 - Additional Config File Settings
 
@@ -213,7 +217,7 @@ You can download them, extract the folders and all you need to do is copy these 
 - mp4decrypt.exe
 - ffmpeg.exe
 
-Place these in the folder that the scraper files are at, these should be created for you already in your user folder under a folder `.config` ie:`C:\Users\Jason\.config\ofscraper\bin\` 
+Place these in the folder that the scraper files are at, these should be created for you already in your user folder under a folder `.config` ie: `C:\Users\Jason\.config\ofscraper\bin\` 
 
 You will then need to tell the scraper where they are. But it should install these for you and place them in a similar spot as mine.
 
@@ -245,9 +249,9 @@ If you cannot open it normally, right-click and do open-with notepad. Then you w
         "dynamic-mode-default": "deviint",
         "partfileclean": true,
 ```
-> [!danger]
+> ## :warning:
 > - To get the full path from, in windows, you can highlight the item and then right click and select 
->![[Pasted image 20230726223048.png]] 
+>![copy as path](<Media/Pasted image 20230726223048.png>)
 >- Then paste it between the quotes of the corresponding line. 
 >- Make sure you add an additional \ to each existing \ that's in the path otherwise you will get errors and the scraper will crash. 
 >- Update the path for the client-id, private-key, ffmpeg, and mp4decrypt
@@ -263,7 +267,7 @@ ofscraper
 
 You should be presented with something that looks similar to this:
 
-![[Pasted image 20230726223835.png]]
+![ofscraper](<Media/Pasted image 20230726223835.png>)
 
 CONGRATULATIONS. You should be able to download now.
 
@@ -288,7 +292,7 @@ CONGRATULATIONS. You should be able to download now.
 
 It'll start downloading and show you progress along the way. You'll find the downloads in folders under : `C:\Users\%username%\Data\ofscraper` 
 Sample of what it looks like on my side.
-![[Pasted image 20230726225515.png]]
+![success](<Media/Pasted image 20230726225515.png>)
 
 When it's done it will ask you if you want to continue with script. Yes will allow you to reselect someone and no will close the terminal.
 
