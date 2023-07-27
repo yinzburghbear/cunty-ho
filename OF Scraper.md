@@ -39,13 +39,13 @@ This is a fairly large app so might take time.
 	2. Click *Create Device* at the top left
 	3. Select *Pixel 6
 		1. Click *Next*
-	4. Select **S** and click on the *download icon* next to it to download that environment. Agree to the terms and the download will begin. as the System Image and *Click Next*
+	4. Select **Pie** and click on the *download icon* next to it to download that environment. Agree to the terms and the download will begin. as the System Image and *Click Next*
 	5. Click *Finish*
 	6. Don't Launch the emulator right away when it's completed.
 	
 # Step 3
 1. Before we launch the emulator, there are a few items we will need to have available.
-2. Download the file "dumper" from this folder. 
+2. Download the zip file called "dumper-main" from this folder. 
 3. Extract it to your downloads folder and navigate to it. 
 4. Once inside right click and select *Open in Terminal*
 5. Type the following in the terminal
@@ -55,7 +55,7 @@ pip install -r .\requirements.txt
 6. You should be returned with something similar to this:
 	1. ![[Pasted image 20230726123434.png]]
 	2. Keep this window open, we will need to come back to it soon.
-7. Also download this file to your computer, *frida-server-16.1.3-android-x86_64* and we will be moving it to the android device. Once downloaded, you will need to copy this to a hidden folder for android.
+7. Also download this file to your computer, *frida-server-16.1.3-android-x86* and we will be moving it to the android device. Once downloaded, you will need to copy this to a hidden folder for android.
 	1. Typical copy the file, and paste it in the platform tools folder. Change the username as needed.
 		1. `C:\Users\jason\AppData\Local\Android\Sdk\platform-tools`
 
@@ -83,39 +83,164 @@ adb.exe devices
 4. You should now see "List of devices attached"
 	1. ![[Pasted image 20230726130323.png]]
 5. Now we are going to copy the Frida file and turn on the server.
-6. Enter the following: 
+6. Enter the following:  <mark style="background: #FF5582A6;">(you can copy and in windows terminal/powershell just right click and it'll auto-paste)</mark>
 ```
-.\adb.exe push frida-server-16.1.3-android-x86_64 /sdcard
+1. .\adb.exe push frida-server-16.1.3-android-x86 /sdcard
 ```
 7. Then now we have to connect to start up Frida. Type the following.
 ```
-.\adb.exe shell
+- .\adb.exe shell
 
-su
+- su
 
-mv /sdcard/frida-server-16.1.3-android-x86_64 /data/local/tmp
+- mv /sdcard/frida-server-16.1.3-android-x86 /data/local/tmp
 
-chmod +x /data/local/tmp/frida-server-16.1.3-android-x86_64
+- chmod +x /data/local/tmp/frida-server-16.1.3-android-x86
 
-/data/local/tmp/frida-server-16.1.3-android-x86_64
+- /data/local/tmp/frida-server-16.1.3-android-x86
 
 ```
-#### Side Note -
-During any one of the phases you may be disconnected from the "shell" and taken back to your regular prompt. Just pick back up.
-![[Pasted image 20230726134014.png]]As you can see that happened to me here. When you reconnect you will need to do **su** again.
 
-You'll know it's running when you are just returned to either a blank emu line or back to your terminal line after entering the final `/data/local/tmp/frida-server-16.1.3-android-x86_64` text info.
+>[!tip] Side-Note
+>During any one of the phases you may be disconnected from the "shell" and taken back to your regular prompt. 
+>![[Pasted image 20230726134014.png]]
+>Just reconnect and remember to you will need to **su** again. Only if you haven't made it to the last line of the code.
+
+You'll know it's running when you are just returned to either a blank emu line or back to your terminal line after entering the final `/data/local/tmp/frida-server-16.1.3-android-x86` text info.
 
 8. Once you've typed in the last line (copy and paste it in works too.) as long as you don't get an error right away, now go back over to the Dumper terminal window and type the following.
 ```
 python dump_keys.py
 ```
 - You'll see text start to run by on the screen. Leave this open and go back to the emulator. 
-	- Looks like this:![[Pasted image 20230726142753.png]]
+	- Looks like this:
+	- ![[Pasted image 20230726204751.png]]
 - Now on the emulator open this page in chrome: https://bitmovin.com/demos/drm
 - You will have to type it in, you can't copy it and the auto-complete from google is incorrect.
 
-It should look similar to this:
-![[Pasted image 20230726143121.png]]
+Once you get the page to load, you'll click play on the video and you should also be able to see the terminal window at the same time. 
+The terminal window will fill in really quick and you should see something like this:
+![[Pasted image 20230726204859.png]]
+
+This is indicating that the keys have been saved to the dump_keys folder and we will need to save those for the only fans app.
+
+Make a copy of these keys and rename them. The path can vary on what it creates, so you'll need to start at the dumper-main folder and start digging through dump_keys until you get to see 2 files. 
+1. client_id.bin
+2. private_key.pem
+
+You will need these shortly, but first we are going to install the application for the OF Scraper itself. 
+Then you'll come back to these.
+
+# Step 5
+
+Download this file. https://github.com/datawhores/OF-Scraper/releases/download/de9ebfc/ofscraper_windows_de9ebfc.zip
+
+Unzip the file to a directory that you would be happy with. 
+I unzipped mine to `C:\Data\OnlyFansScraper\` 
+
+Wherever you unzip the folder to, navigate there and then open a terminal from there. Right-Click and select terminal.
+- Enter the following
+```
+ofscraper
+- or - 
+.\ofscraper
+```
+
+You will then be prompted through the install process of the scraper. There are some things that it needs to be able to run the files. 
+
+If you use firefox, you can use this extension to get the necessary cookie information. You can download it here: https://addons.mozilla.org/en-US/firefox/addon/onlyfans/
+
+But you can also get the information yourself using developer tools.
+
+**Sign into Onlyfans in your browser.**
+
+### Manual Cookie Info
+
+This option will have you manual fill all the required information
+```
+{
+    "auth": {
+        "app-token": "",
+        "sess": "",
+        "auth_id": "",
+        "auth_uniq_": "",
+        "user_agent": "",
+        "x-bc": ""
+    }
+}
+```
+
+It's really not that bad. I'll show you in the next sections how to get these bits of info.
+
+##### Step One: Creating the 'auth.json' File
+
+You first need to run the program in order for the `auth.json` file to be created. To run it, simply type `ofscraper` in your terminal and hit enter. Because you don't have an `auth.json` file, the program will create one for you and then ask you to enter some information. Now we need to get that information.
+##### Step Two: Getting Your Auth Info
+Open DevTools, Hit F12 on your keyboard.
+
+Click on the network tab![[Pasted image 20230726212539.png]]then you can click on filter and search for id.
+You may need to refresh Onlyfans to get the info to populate.
+
+You need to get the following: Explained below
+- `sess=`
+- `suth_id=`
+- `auth_uid=`
+- `User-Agent`
+- `x-bc`
+
+> Your `auth_uid_` *will only appear* **if you have 2FA (two-factor authentication)** enabled. *Also, keep in mind that your auth_uid_ will have numbers after the final underscore and before the equal sign (that's your auth_id)*.
+> 
+> Once you've copied the value for your `sess` cookie, go back to the program, paste it in, and hit enter. Now go back to your browser, copy the `auth_id` value, and paste it into the program and hit enter. Then go back to your browser, copy the `auth_uid_` value, and paste it into the program and hit enter (**leave this blank if you don't use 2FA!!!**).
+> 
+> Once you do that, the program will ask for your user agent. You should be able to find your user agent in a field called `User-Agent` below the `Cookie` field. Copy it and paste it into the program and hit enter.
+> 
+> After it asks for your user agent, it will ask for your `x-bc` token. You should also be able to find this in the `Request Headers` section.
 
 
+
+
+
+# Important Config
+
+This is what my config file looks like.
+```
+{
+    "config": {
+        "main_profile": "main_profile",
+        "save_location": "C:\\Users\\jason\\Data\\ofscraper",
+        "file_size_limit": 0,
+        "dir_format": "{model_username}/{responsetype}/{mediatype}/",
+        "file_format": "{filename}.{ext}",
+        "textlength": "0",
+        "space-replacer": " ",
+        "date": "MM-DD-YYYY",
+        "metadata": "{configpath}/{profile}/.data/{model_username}_{model_id}",
+        "filter": [
+            "Images",
+            "Videos"
+        ],
+        "threads": "10",
+        "code-execution": true,
+        "custom": null,
+        "mp4decrypt": "C:\\Users\\jason\\.config\\ofscraper\\bin\\mp4decrypt.exe",
+        "ffmpeg": "C:\\Users\\jason\\.config\\ofscraper\\bin\\ffmpeg.exe",
+        "discord": "",
+        "private-key": "C:\\Users\\jason\\.config\\ofscraper\\bin\\device_private_key.pem",
+        "client-id": "C:\\Users\\jason\\.config\\ofscraper\\bin\\device_client_id_blob.bin",
+        "key-mode-default": "manual",
+        "dynamic-mode-default": "deviint",
+        "partfileclean": true,
+        "responsetype": {
+            "timeline": "Posts",
+            "archived": "Archived",
+            "pinned": "Posts",
+            "message": "Messages",
+            "paid": "Messages",
+            "stories": "Stories",
+            "highlights": "Stories",
+            "profile": "Profile"
+        }
+    }
+}
+
+```
