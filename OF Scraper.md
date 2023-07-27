@@ -2,7 +2,9 @@
 
 # Step 1 - Install Python
 1. Check for Python and Install if needed.
-2. Open Terminal. Click Start -> type "Terminal" ![Pasted image 20230726111646.png](Media/Pasted image 20230726111646.png)
+2. Open Terminal. Click Start -> type "Terminal" 
+![Screenshot of a comment on a GitHub issue showing an image, added in the Markdown, of an Octocat smiling and raising a tentacle.](https://myoctocat.com/assets/images/base-octocat.svg)
+![Pasted image 20230726111646.png](Media/Pasted image 20230726111646.png)
 3. Enter: 
 ```
 py -3 -V
