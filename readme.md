@@ -11,10 +11,21 @@ A lot of this is based off of what is here:
 4. https://forum.videohelp.com/threads/408031-Dumping-Your-own-L3-CDM-with-Android-Studio?s=f22ce643aaaca3496c59a76a2a78c567
 5. https://github.com/lucidyan/dumper/tree/add-android-13-support
 6. https://addons.mozilla.org/en-US/firefox/addon/onlyfans/
-7. https://frida.re/docs/android/ 
+7. https://frida.re/docs/android/
+
+### tl;dr 
+You need the following:
+- Python
+- pipx
+- Android Studio
+	- Virtual Device Pixel 6 w/ Pie installed
+- Frida Server (in this repo)
+- dumper-main (in this repo)
+- ffmpeg
+- mp4decrypt
 
 #### Let me know if I can help :grin:
-
+___
 
 # Step 1 - Install Python
 
@@ -51,7 +62,7 @@ A lot of this is based off of what is here:
     pip 23.1.2 from C:\Users\jason\AppData\Local\Programs\Python\Python311\Lib\site-packages\pip (python 3.11)
     ```
 
-8. Install Pipx:
+8. Install pipx:
     Enter the following in the terminal window:
 
 ``` 
@@ -81,7 +92,7 @@ pipx install ofscraper
 This will begin the install process. When complete you will receive the following prompt
 ![Successfull Scraper Install!](<Media/Screenshot 2023-07-27 114806.png>)
 
-
+___
 # Step 2 - Install Android Studio
 
 DRM override settings will take some time. 
@@ -110,7 +121,7 @@ This is a fairly large app so might take time.
 5. Click *Finish*
 
 6. Don't Launch the emulator right away when it's completed.
-
+___
 # Step 3 - Frida & Dumper
 
 1. Before we launch the emulator, there are a few items we will need to have available.
@@ -130,7 +141,7 @@ pip install -r .\requirements.txt
 	1. Typical copy the file, and paste it in the platform tools folder. Change the username as needed.
     
 		1. `C:\Users\jason\AppData\Local\Android\Sdk\platform-tools`
-
+___
 # Step 4 - Running the Emulator
 
 1. Let's start the emulator
@@ -207,7 +218,7 @@ Make a copy of these keys and rename them. The path can vary on what it creates,
 
 You will need these shortly, but first we are going to install the application for the OF Scraper itself. 
 Then you'll come back to these.
-
+___
 # Step 5 - Setting up Auth and Config File
 
 Time to setup the App. Open a terminal window and type:
@@ -263,7 +274,7 @@ You will then be prompted through the install process of the scraper and will ne
 >
 >Once you do that, the program will ask for your user agent. You should be able to find your user agent in a field called `User-Agent` below the `Cookie` field. 
 >Copy it and paste it into the program and hit enter. After it asks for your user agent, it will ask for your `x-bc` token. You should also be able to find this in the `Request Headers` section.
-
+___
 # Step 6 - Additional Config File Settings
 
 You should be able to move to the next part of the installation. 
@@ -282,7 +293,7 @@ Place these in the folder that the scraper files are at, these should be created
 You will then need to tell the scraper where they are. But it should install these for you and place them in a similar spot as mine.
 
 Once it's done and the configuration is complete let's close the terminal and we have to go back to the keys and set those up. You're almost done!
-
+___
 # Step 7 - The End!
 
 In your keys folder, you want to take the two key files:
@@ -357,7 +368,7 @@ Sample of what it looks like on my side.
 ![success](<Media/Pasted image 20230726225515.png>)
 
 When it's done it will ask you if you want to continue with script. Yes will allow you to reselect someone and no will close the terminal.
-
+___
 # My Config
 
 This is what my config file looks like.
